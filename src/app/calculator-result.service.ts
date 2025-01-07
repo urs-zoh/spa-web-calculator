@@ -14,21 +14,17 @@ export class CalculatorResultService {
   }
 
   appendNumber(number: string) {
-    // If '.' is pressed and the current value already contains '.', do nothing
     if (number === '.' && this.currentValue.includes('.')) {
       return;
     }
 
-    // Handle case where the value is '0' or an empty string
     if (this.waitingForSecondOperand) {
       this.currentValue = number === '.' ? '0.' : number;
       this.waitingForSecondOperand = false;
     } else {
       if (number === '.' && this.currentValue === '') {
-        // If '.' is the first character, prefix with '0'
         this.currentValue = '0.';
       } else {
-        // Append the number normally
         this.currentValue = this.currentValue === '0' ? number : this.currentValue + number;
       }
     }
